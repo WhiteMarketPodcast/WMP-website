@@ -26,11 +26,15 @@
   &:hover {
     opacity: 1;
   }
+}
 
-  #navbar-logo {
-    height: 90px;
-    padding: 0px 30px;
-  }
+#navbar-logo-link {
+  padding: 0px !important;
+}
+
+#navbar-logo {
+  height: 90px;
+  padding: 0px 30px;
 }
 
 #navbar-search {
