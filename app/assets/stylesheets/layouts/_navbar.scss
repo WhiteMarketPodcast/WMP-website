@@ -1,0 +1,39 @@
+#navbar {
+  height: 100px;
+  width: 100%;
+  background-color: $gray;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+#navbar-desktop-menu {
+  display: flex;
+}
+#navbar-mobile-menu {
+  padding: 0 30px;
+  font-size: 30px;
+}
+
+#navbar-mobile-menu,
+#navbar-logo-link,
+#navbar-search {
+  opacity: 0.8;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  #navbar-logo {
+    height: 90px;
+    padding: 0px 30px;
+  }
+}
+
+#navbar-search {
+  padding: 0px 30px;
+  cursor: pointer;
+}

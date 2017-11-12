@@ -3,12 +3,22 @@ html
   head
     meta charset="UTF-8"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    title White Market Podcast
+    title White Market Podcast | Free Music and Free Culture
     = csrf_meta_tags
     = action_cable_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
 
   body
-    = yield
+    #site-wrapper
+      #navbar
+        = render 'shared/navbar'
+
+      #page-content
+        .container
+          .row
+            = yield
+
+      #footer
+        = render 'shared/footer'
     = javascript_include_tag 'application'
     = javascript_pack_tag 'application'
