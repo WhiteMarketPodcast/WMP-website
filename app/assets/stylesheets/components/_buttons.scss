@@ -1,0 +1,9 @@
+.btn-green-outline {
+  border: 1px solid $green;
+  border-radius: 8px;
+  padding: 8px 20px;
+
+  &:hover {
+    border-color: darken($green, 10%);
+  }
+}

@@ -1,0 +1,31 @@
+.padded
+  .row
+    .col-xs-12
+      = will_paginate @posts
+
+  .row
+    .col-xs-12.col-md-8
+      - @posts.each do |post|
+        .blog-post-container
+          / Blog post title
+          .text-container
+            = link_to blog_post_path(post) do
+              h2= post.title
+            = link_to l(post.created_at.to_date, format: :long), blog_post_path(post)
+
+          / Blog post image
+          = link_to blog_post_path(post) do
+            = image_tag "https://picsum.photos/1000/500/?random"
+
+          / Blog post text (preview)
+          .text-container
+            p= post.content
+            .link-to-post
+              = link_to "Keep reading", blog_post_path(post), class: "btn-green-outline"
+
+    .col-xs-12.col-md-4
+      = render "shared/sidebar"
+
+  .row
+    .col-xs-12
+      = will_paginate @posts
