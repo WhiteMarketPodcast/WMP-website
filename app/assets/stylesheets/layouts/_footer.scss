@@ -12,10 +12,28 @@
   padding: 15px 30px;
 }
 
+#footer-icon-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @media (max-width: 767px) {
   #footer {
     flex-direction: column-reverse;
     height: 100px;
     justify-content: space-around;
+    a {
+      padding: 0;
+    }
+  }
+
+  #footer-icon-links {
+    width: inherit;
+    max-width: 350px;
+  }
+
+  #footer-cc-notice {
+    font-size: 80%;
   }
 }

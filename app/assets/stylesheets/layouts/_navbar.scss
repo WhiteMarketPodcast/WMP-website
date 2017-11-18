@@ -12,8 +12,9 @@
 #navbar-desktop-menu {
   display: flex;
 }
+
 #navbar-mobile-menu {
-  padding: 0 30px;
+  padding: 0 20px;
   font-size: 30px;
 }
 
@@ -29,15 +30,28 @@
 }
 
 #navbar-logo-link {
-  padding: 0px !important;
+  padding: 0 30px !important;
 }
 
 #navbar-logo {
-  height: 90px;
-  padding: 0px 30px;
+  height: 80px;
 }
 
 #navbar-search {
   padding: 0px 30px;
   cursor: pointer;
+}
+
+@media(max-width: 767px) {
+  #navbar {
+    height: 70px;
+  }
+
+  #navbar-logo-link {
+    padding: 0 20px !important;
+  }
+
+  #navbar-logo {
+    height: 60px;
+  }
 }
