@@ -2,7 +2,7 @@
 .blog-post-container {
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0px 5px 5px #CCC;
+  box-shadow: 0px 5px 5px darken($bg-off-white, 10%);
   margin-bottom: 30px;
 
   img {
@@ -24,4 +24,51 @@
       color: darken($text-gray, 15%);
     }
   }
+}
+
+.blog-post-header-container {
+  position: relative;
+
+  img {
+    height: 300px;
+    min-height: 50vh;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+
+.blog-post-title-container {
+  position: absolute;
+  bottom: 30px;
+  left: 10%;
+  right: 30%;
+  padding: 25px 35px;
+  background-color: white;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+@media(max-width: 767px) {
+  .blog-post-title-container {
+    position: relative;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding: 20px 5px;
+  }
+
+  .blog-post-header-container img {
+    height: 250px;
+    min-height: inherit;
+  }
+}
+
+
+
+.blog-post-content-container {
+  background-color: white;
+  padding: 20px;
 }

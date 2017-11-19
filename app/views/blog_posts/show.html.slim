@@ -1,3 +1,11 @@
-h1= "#{@post.id}: #{@post.title}"
-= image_tag "https://picsum.photos/600/300/?random"
-p= @post.content
+.blog-post-header-container
+  = image_tag "https://picsum.photos/1200/500/?random"
+  .blog-post-title-container.hidden-xs
+    h1.gradient-title= @post.title
+.container
+  .row
+    .col-xs-12.col-md-8.col-md-offset-2.col-lg-6
+      .blog-post-content-container
+        .blog-post-title-container.hidden-sm.hidden-md.hidden-lg
+          h1.gradient-title= @post.title
+        p= @post.content

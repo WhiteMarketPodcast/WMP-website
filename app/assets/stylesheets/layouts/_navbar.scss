@@ -1,11 +1,11 @@
 #navbar {
   height: 100px;
   width: 100%;
-  background-color: $gray;
-  color: #FFFFFF;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-image: linear-gradient(90deg, $whitemarket-emerald, $whitemarket-green);
+  color: #FFFFFF;
   font-weight: bold;
 }
 

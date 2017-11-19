@@ -1,6 +1,6 @@
 html,
 body {
-  background-color: #DDD;
+  background-color: $bg-off-white;
   height: 100%;
   margin: 0px;
   padding: 0px;
@@ -27,24 +27,32 @@ p {
 
 // Links in general
 a {
-  color: $green;
+  color: $whitemarket-green;
   text-decoration: none;
   transition: all 0.2s ease;
 
   &:hover {
-    color: darken($green, 10%);
+    color: darken($whitemarket-green, 10%);
     text-decoration: none;
   }
 }
 
 #footer a,
 #navbar a {
+  color: darken(white, 5%);
   padding: 0px 15px;
-  color: darken(white, 15%);
   transition: all 0.2s ease;
 
   &:hover{
     color: white;
     text-decoration: none;
   }
+}
+
+.small-text {
+  font-size: 80%;
+}
+
+@media(max-width: 767px) {
+  h1 { font-size: 35px; }
 }
