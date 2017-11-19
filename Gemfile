@@ -18,6 +18,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'slim'
 gem 'will_paginate'
+gem 'paperclip'
 
 group :development, :test do
   gem 'pry-byebug'
