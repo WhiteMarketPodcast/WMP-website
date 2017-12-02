@@ -19,6 +19,7 @@ gem 'uglifier'
 gem 'slim'
 gem 'will_paginate'
 gem 'paperclip'
+gem 'plyr-rails'
 
 group :development, :test do
   gem 'pry-byebug'
