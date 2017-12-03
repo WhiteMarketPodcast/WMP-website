@@ -1,9 +1,10 @@
 .btn-green-outline {
   border: 1px solid $whitemarket-green;
   border-radius: 8px;
-  padding: 8px 20px;
+  padding: 12px 30px;
 
   &:hover {
-    border-color: darken($whitemarket-green, 10%);
+    background-color: $whitemarket-green;
+    color: white;
   }
 }
