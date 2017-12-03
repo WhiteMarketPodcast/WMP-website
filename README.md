@@ -10,7 +10,7 @@ If you want to get started quickly, check out our [open issues](https://github.c
 
 This repo is open source and all the code here is available under a [Mozilla Public License Version 2](https://github.com/WhiteMarketPodcast/WMP-website/blob/master/LICENSE.md). We encourage you to read the file before submitting work here. 
 
-Make sure you also read our [CODE_OF_CONDUCT.md](https://github.com/WhiteMarketPodcast/WMP-website/blob/master/CODE_OF_CONDUCT.md). If you submit any work here, we assume you read and accepted those rules. 
+Make sure you also read our [Code of Conduct](https://github.com/WhiteMarketPodcast/WMP-website/blob/master/CODE_OF_CONDUCT.md). If you submit any work here, we assume you read and accepted those rules. 
 
 
 ### Find out more about the show or get in touch:
