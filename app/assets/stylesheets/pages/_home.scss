@@ -1,1 +1,13 @@
 // Specific CSS for your home-page
+#latest-podcast {
+  min-height: 500px;
+  background-image: linear-gradient(45deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), image-url("CCBY-WikipediaByWikimedia.jpg");
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 50px 10%;
+
+  h1 {
+    color: white;
+  }
+}
