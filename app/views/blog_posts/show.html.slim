@@ -1,11 +1,9 @@
 .blog-post-header-container
   = image_tag "https://picsum.photos/1200/500/?random"
-  .blog-post-title-container.hidden-xs
+  .blog-post-title-container
     h1.gradient-title= @post.title
 .container
   .row
     .col-xs-12.col-md-8.col-md-offset-2
       .blog-post-content-container
-        .blog-post-title-container.hidden-sm.hidden-md.hidden-lg
-          h1.gradient-title= @post.title
         p= @post.content
