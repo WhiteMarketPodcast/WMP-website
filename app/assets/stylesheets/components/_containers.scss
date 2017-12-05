@@ -53,11 +53,15 @@
 
 @media(max-width: 767px) {
   .blog-post-title-container {
-    position: relative;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    padding: 20px 5px;
+    left: 10px;
+    right: 25px;
+    bottom: 10px;
+    padding: 20px 15px;
+    background-color: transparentize(white, 0.15);
+
+    h1 {
+      font-size: 160%;
+    }
   }
 
   .blog-post-header-container img {
