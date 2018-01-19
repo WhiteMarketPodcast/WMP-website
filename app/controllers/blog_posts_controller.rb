@@ -12,6 +12,10 @@ class BlogPostsController < ApplicationController
               locale: locale,
               blog_post_id: params[:id]
             ).first
-    @post ||= BlogPost.find(params[:id])
+    @post ||= LocalizedBlogPost.where(
+                locale: :en,
+                blog_post_id: params[:id]
+              ).first
+    @post ||= LocalizedBlogPost.where(blog_post_id: params[:id]).first
   end
 end
