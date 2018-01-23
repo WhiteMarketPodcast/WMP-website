@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 #Casein routes
 namespace :casein do
+    resources :blog_posts
+    get "blog/:id/add_translation", to: "blog_posts#add_translation", as: :add_blog_post_translation
     resources :episodes
 end
 

@@ -6,23 +6,24 @@
 
     .row
       .col-xs-12.col-md-8
-        - @posts.each do |post|
+        - @posts.each do |blog_post|
+          - post = blog_post.localized_version(locale)
           .blog-post-container
             / Blog post title
             .text-container
-              = link_to blog_post_path(post) do
+              = link_to blog_post_path(blog_post) do
                 h2.gradient-title= post.title
               .small-text= l(post.created_at.to_date, format: :long)
 
             / Blog post image
-            = link_to blog_post_path(post) do
+            = link_to blog_post_path(blog_post) do
               = image_tag "https://picsum.photos/1000/500/?random"
 
             / Blog post text (preview)
             .text-container
               p= post.content
               .link-to-post
-                = link_to "Keep reading", blog_post_path(post), class: "btn-green-outline"
+                = link_to "Keep reading", blog_post_path(blog_post), class: "btn-green-outline"
 
       .col-xs-12.col-md-4
         = render "shared/sidebar"
