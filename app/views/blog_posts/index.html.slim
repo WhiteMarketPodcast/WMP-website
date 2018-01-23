@@ -17,7 +17,7 @@
 
             / Blog post image
             = link_to blog_post_path(blog_post) do
-              = image_tag "https://picsum.photos/1000/500/?random"
+              = image_tag(blog_post.photo || "https://picsum.photos/1000/500/?random")
 
             / Blog post text (preview)
             .text-container

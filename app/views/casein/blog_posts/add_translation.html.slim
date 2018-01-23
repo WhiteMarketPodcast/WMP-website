@@ -2,8 +2,9 @@ h2
   | Add a new translation for blog post
   = " " + @blog_post_id
 
-= form_for @localized_blog_post, url: casein_blog_posts_path do |f|
-  = render partial: 'casein/blog_posts/form', locals: { f: f }
+= form_for @blog_post, url: casein_blog_post_path(@blog_post) do |f|
+  = f.fields_for @localized_blog_post do |localized|
+    = render partial: 'casein/blog_posts/form', locals: { f: localized }
 
   p.submits
     = link_to 'Cancel', casein_blog_posts_path, class: 'btn btn-mini btn-danger'

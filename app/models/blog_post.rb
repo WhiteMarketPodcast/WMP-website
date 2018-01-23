@@ -1,5 +1,6 @@
 class BlogPost < ApplicationRecord
   has_many :localized_blog_posts, dependent: :destroy
+  mount_uploader :photo, PhotoUploader
 
   def localized_version(locale = nil)
     localized_post = localized_blog_posts.where(locale: locale).first if locale
@@ -8,5 +9,4 @@ class BlogPost < ApplicationRecord
 
     localized_post
   end
-
 end

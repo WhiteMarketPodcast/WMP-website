@@ -18,12 +18,19 @@ module Casein
 
     def new
       @casein_page_title = 'Add a new blog post'
+      @blog_post = BlogPost.new
       @localized_blog_post = LocalizedBlogPost.new
     end
 
     def create
-      @localized_post = LocalizedBlogPost.new(blog_post_params)
+      @localized_post = LocalizedBlogPost.new(blog_post_params[:localized_blog_post])
       @localized_post.blog_post = @blog_post
+
+      binding.pry
+
+      if blog_post_params[:photo]
+        @blog_post.update_attributes(photo: blog_post_params[:photo])
+      end
 
       if @localized_post.save
         flash[:notice] = 'Blog post created'
@@ -40,12 +47,19 @@ module Casein
       @localized_blog_post = LocalizedBlogPost.new(blog_post_id: params[:id])
     end
 
+    def create_translation
+      LocalizedBlogPost.create(blog_post_params[:localized_blog_post])
+      render action: :show
+    end
+
     def update
       @casein_page_title = 'Update blog post'
 
       @localized_blog_post = LocalizedBlogPost.where(blog_post_id: params[:id], locale: blog_post_params[:locale]).first
 
-      if @localized_blog_post.update_attributes blog_post_params
+      return create_translation unless @localized_blog_post
+
+      if @localized_blog_post.update_attributes blog_post_params[:localized_blog_post]
         flash[:notice] = 'Blog post has been updated'
         redirect_to casein_blog_posts_path
       else
@@ -65,12 +79,12 @@ module Casein
     private
 
     def get_blog_post
-      @blog_post_id = params[:localized_blog_post][:blog_post_id] rescue params[:id]
+      @blog_post_id = params[:blog_post][:localized_blog_post][:blog_post_id] rescue params[:id]
       @blog_post = !@blog_post_id.empty? ? BlogPost.find(@blog_post_id) : BlogPost.create
     end
 
     def blog_post_params
-      params.require(:localized_blog_post).permit(:locale, :title, :content, :blog_post_id)
+      params.require(:blog_post).permit(:photo, :photo_cache, localized_blog_post: [:title, :content, :locale, :blog_post_id])
     end
   end
 end

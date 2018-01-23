@@ -21,6 +21,8 @@ gem 'slim'
 gem 'will_paginate'
 gem 'plyr-rails'
 gem 'casein', '~>5.3.0'
+gem 'carrierwave'
+gem 'cloudinary'
 
 group :development, :test do
   gem 'pry-byebug'
