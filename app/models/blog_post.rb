@@ -1,5 +1,5 @@
 class BlogPost < ApplicationRecord
-  has_many :localized_blog_posts
+  has_many :localized_blog_posts, dependent: :destroy
 
   def localized_version(locale = nil)
     localized_post = localized_blog_posts.where(locale: locale).first if locale
