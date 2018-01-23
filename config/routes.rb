@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+
+#Casein routes
+namespace :casein do
+    resources :episodes
+end
+
   root to: 'pages#home'
 
   scope '(:locale)', locale: /en|pt/ do

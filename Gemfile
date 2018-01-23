@@ -20,6 +20,7 @@ gem 'uglifier'
 gem 'slim'
 gem 'will_paginate'
 gem 'plyr-rails'
+gem 'casein', '~>5.3.0'
 
 group :development, :test do
   gem 'pry-byebug'
