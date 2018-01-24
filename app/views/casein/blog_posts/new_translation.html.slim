@@ -2,7 +2,7 @@ h2
   | Add a new translation for blog post
   = " " + @blog_post_id
 
-= form_for @blog_post, url: casein_blog_post_path(@blog_post) do |f|
+= form_for @blog_post, url: casein_create_blog_post_translation_path(@blog_post), method: :post do |f|
   = f.fields_for @localized_blog_post do |localized|
     = render partial: 'casein/blog_posts/form', locals: { f: localized }
 

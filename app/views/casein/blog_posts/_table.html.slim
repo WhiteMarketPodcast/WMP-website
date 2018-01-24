@@ -3,12 +3,10 @@
 table.table.table-striped.table-hover.table-condensed
   thead
     tr
-      th= casein_sort_link "ID", :id
-      th= casein_sort_link "Title", :title
-      th= casein_sort_link "Content", :content
+      th ID
+      th Title
+      th Content
       th &nbsp;
-
-
 
   - blog_posts.each do |blog_post|
     - localized_post = blog_post.localized_version
