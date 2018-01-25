@@ -11,9 +11,9 @@ p Main image
   = f.submit "Update photo", class: "btn btn-mini btn-primary"
 
 - @blog_post.localized_blog_posts.each do |post|
-  = form_for post, url: casein_blog_post_path(@blog_post) do |f|
-
-    = render partial: 'casein/blog_posts/form', locals: { f: f }
+  = form_for @blog_post, url: casein_blog_post_path(@blog_post) do |f|
+    = f.fields_for post do |localized|
+      = render partial: 'casein/blog_posts/form', locals: { f: localized }
 
     p class="submits"
       - if @blog_post.localized_blog_posts.count > 1

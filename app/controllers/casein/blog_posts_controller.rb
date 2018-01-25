@@ -44,21 +44,34 @@ module Casein
     def update
       @casein_page_title = 'Update blog post'
 
-      @localized_blog_post = LocalizedBlogPost.where(blog_post_id: params[:id], locale: blog_post_params[:locale]).first
+      # At the moment, either the photo gets updated, or one translation does
+      if blog_post_params[:photo]
+        if @blog_post.update_attributes(photo: blog_post_params[:photo])
+          flash[:notice] = "The blog post's main image has been updated."
+        else
+          flash[:warning] = "There was a problem updating the image."
+        end
 
-      if blog_post_params[:photo] && @blog_post.update_attributes(photo: blog_post_params[:photo])
-        flash[:notice] = "The blog post's main image has been updated"
-      end
+      elsif info = blog_post_params[:localized_blog_post]
+        @localized_blog_post = LocalizedBlogPost.where(
+                                blog_post_id: info[:blog_post_id],
+                                locale: info[:locale]
+                              ).first
+        if !@localized_blog_post
+          flash.now[:warning] = "Couldn't find that translation in the database"
 
-      return redirect_to casein_blog_post_path(@blog_post) if !@localized_blog_post
+        elsif @localized_blog_post.update_attributes(info)
+          flash[:notice] = '#{info[:locale].upcase} Translation has been updated'
 
-      if @localized_blog_post.update_attributes blog_post_params[:localized_blog_post]
-        flash[:notice] = 'Blog post has been updated'
-        redirect_to casein_blog_posts_path
+        else
+          flash.now[:warning] = 'There were problems when trying to update this blog post'
+        end
+
       else
-        flash.now[:warning] = 'There were problems when trying to update this blog post'
-        render action: :show
+        flash[:warning] = "Ciaran's messed this up somehow. Tell him."
       end
+
+      return redirect_to casein_blog_post_path(@blog_post)
     end
 
     def destroy
@@ -106,7 +119,7 @@ module Casein
     end
 
     def blog_post_params
-      params.require(:blog_post).permit(:id, :photo, :photo_cache, :localized_blog_post_id, localized_blog_post: [:title, :content, :locale, :blog_post_id])
+      params.require(:blog_post).permit(:id, :photo, :photo_cache, localized_blog_post: [:title, :content, :locale, :blog_post_id])
     end
   end
 end
