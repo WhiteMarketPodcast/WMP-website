@@ -5,6 +5,8 @@ h2 Add a new blog post
 = form_for @blog_post, url: casein_blog_posts_path do |f|
   = f.fields_for @localized_blog_post do |localized|
     = render partial: 'casein/blog_posts/form', locals: { f: localized }
+  div
+    label Main image
   = f.file_field :photo
   = f.hidden_field :photo_cache
 

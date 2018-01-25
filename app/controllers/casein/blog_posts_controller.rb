@@ -3,20 +3,20 @@
 module Casein
   class BlogPostsController < Casein::CaseinController
     ## optional filters for defining usage according to Casein::AdminUser access_levels
-    # before_action :needs_admin, except: [:action1, :action2]
+    before_action :needs_admin
     before_action :get_blog_post, except: [:index, :new]
 
     def index
-      @casein_page_title = 'Blog posts'
+      @casein_page_title = "Blog posts"
       @blog_posts = BlogPost.includes(:localized_blog_posts).paginate page: params[:page]
     end
 
     def show
-      @casein_page_title = 'View blog post'
+      @casein_page_title = "View blog post"
     end
 
     def new
-      @casein_page_title = 'Add a new blog post'
+      @casein_page_title = "Add a new blog post"
       @blog_post = BlogPost.new
       @localized_blog_post = LocalizedBlogPost.new
     end
@@ -25,24 +25,22 @@ module Casein
       @localized_post = LocalizedBlogPost.new(blog_post_params[:localized_blog_post])
       @localized_post.blog_post = @blog_post
 
-      binding.pry
-
       if blog_post_params[:photo]
         @blog_post.update_attributes(photo: blog_post_params[:photo])
       end
 
       if @localized_post.save
-        flash[:notice] = 'Blog post created'
+        flash[:notice] = "Blog post created"
         redirect_to casein_blog_posts_path
       else
         @blog_post.destroy unless @blog_post_id
-        flash.now[:warning] = 'There were problems when trying to create a new blog post'
+        flash.now[:warning] = "There were problems when trying to create a new blog post"
         render action: :new
       end
     end
 
     def update
-      @casein_page_title = 'Update blog post'
+      @casein_page_title = "Update blog post"
 
       # At the moment, either the photo gets updated, or one translation does
       if blog_post_params[:photo]
@@ -61,14 +59,14 @@ module Casein
           flash.now[:warning] = "Couldn't find that translation in the database"
 
         elsif @localized_blog_post.update_attributes(info)
-          flash[:notice] = '#{info[:locale].upcase} Translation has been updated'
+          flash[:notice] = "#{info[:locale].upcase} Translation has been updated"
 
         else
-          flash.now[:warning] = 'There were problems when trying to update this blog post'
+          flash.now[:warning] = "There were problems when trying to update this blog post"
         end
 
       else
-        flash[:warning] = "Ciaran's messed this up somehow. Tell him."
+        flash[:notice] = "Nothing happened. Did you try to update something? Maybe Ciaran messed something up. If you think so, tell him."
       end
 
       return redirect_to casein_blog_post_path(@blog_post)
@@ -78,34 +76,34 @@ module Casein
       @blog_post = BlogPost.find params[:id]
 
       @blog_post.destroy
-      flash[:notice] = 'Blog post has been deleted'
+      flash[:notice] = "Blog post has been deleted"
       redirect_to casein_blog_posts_path
     end
 
     def new_translation
-      @casein_page_title = 'Add a new translation'
+      @casein_page_title = "Add a new translation"
       @localized_blog_post = LocalizedBlogPost.new(blog_post_id: params[:id])
     end
 
     def create_translation
       if LocalizedBlogPost.create(blog_post_params[:localized_blog_post])
-        flash[:notice] = 'Translation created'
+        flash[:notice] = "Translation created"
       else
-        flash.now[:warning] = 'There were problems when trying to create this translation'
+        flash.now[:warning] = "There were problems when trying to create this translation"
       end
-      render action: :show
+      redirect_to casein_blog_post_path(@blog_post)
     end
 
     def delete_translation
       localized_blog_post = LocalizedBlogPost.where(
-                              id: blog_post_params[:localized_blog_post_id],
+                              id: params[:localized_blog_post_id],
                               blog_post_id: @blog_post_id
                             ).first
 
       if localized_blog_post && localized_blog_post.destroy
-        flash[:notice] = 'Translation deleted'
+        flash[:notice] = "Translation deleted"
       else
-        flash.now[:warning] = 'There were problems when trying to delete this translation'
+        flash.now[:warning] = "There were problems when trying to delete this translation"
       end
 
       redirect_to action: :show
@@ -114,12 +112,22 @@ module Casein
     private
 
     def get_blog_post
-      @blog_post_id = params[:blog_post][:localized_blog_post][:blog_post_id] rescue params[:id]
-      @blog_post = !@blog_post_id.empty? ? BlogPost.find(@blog_post_id) : BlogPost.create
+      @blog_post_id = params[:id] || params[:blog_post][:localized_blog_post][:blog_post_id]
+
+      if !@blog_post_id || @blog_post_id.empty?
+        @blog_post = BlogPost.create
+      else
+        @blog_post = BlogPost.find(@blog_post_id)
+      end
+
     end
 
     def blog_post_params
-      params.require(:blog_post).permit(:id, :photo, :photo_cache, localized_blog_post: [:title, :content, :locale, :blog_post_id])
+      params.require(:blog_post)
+            .permit(
+              :id, :photo, :photo_cache, :localized_blog_post_id,
+              localized_blog_post: [:id, :title, :content, :locale, :blog_post_id]
+            )
     end
   end
 end
